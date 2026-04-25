@@ -1,26 +1,381 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400&display=swap");
 @import "tailwindcss";
 
+/* =========================
+   ROOT COLOR VARIABLES
+========================= */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --color-primary: #072040;
+  --color-secondary: #0cb1f2;
+  /* --color-accent: #efaf25; */
+  --color-bg-primary: #072040;
+  --color-bg-secondary: #0cb1f2;
+  --color-bg-main: #ffffff;
+  --color-bg-light: #f2f2f2;
+
+  --color-text-main: #072040;
+  --color-text-light: #ffffff;
+
+  /* --gradient-main: linear-gradient(
+    76deg,
+    #212455 0%,
+    #2f4090 50%,
+    #efaf25 100%
+  ); */
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
+/* =========================
+   DARK MODE (optional tweak)
+========================= */
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --color-bg-main: #ffffff;
+    --color-text-main: #ededed;
+  }
+}
+html {
+  scroll-behavior: smooth;
+}
+/* =========================
+   BASE STYLES
+========================= */
+body {
+  background: var(--color-bg-main);
+  color: var(--color-text-main);
+  font-family: "Poppins", Arial, Helvetica, sans-serif;
+}
+
+/* =========================
+   TEXT COLORS
+========================= */
+.text-primary {
+  color: var(--color-primary);
+}
+
+.text-secondary {
+  color: var(--color-secondary);
+}
+
+/* =========================
+   BACKGROUNDS
+========================= */
+.bg-primary {
+  background-color: var(--color-primary);
+}
+
+.bg-secondary {
+  background-color: var(--color-secondary);
+}
+
+.bg-light {
+  background-color: var(--color-bg-light);
+}
+
+.bg-gradient {
+  background: var(--gradient-main);
+}
+
+/* =========================
+   COMMON BUTTON
+========================= */
+.common-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+
+  padding: 10px 12px 10px 24px;
+  border-radius: 9999px;
+
+  font-weight: 600;
+  color: white;
+
+  /* background: linear-gradient(
+    76deg,
+    var(--color-bg-primary),
+    var(--color-bg-secondary),
+    var(--color-bg-main)
+  ); */
+  background-color: var(--color-bg-secondary);
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: none;
+}
+
+/* Hover & Click */
+.common-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.common-btn:active {
+  transform: scale(0.95);
+}
+
+/* =========================
+   ARROW CIRCLE
+========================= */
+.common-btn .arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 32px;
+  height: 32px;
+
+  border-radius: 50%;
+  background: white;
+  color: var(--color-primary);
+
+  transition: transform 0.3s ease;
+}
+
+/* Arrow Animation on Hover */
+.common-btn:hover .arrow {
+  transform: translateX(6px);
+}
+
+/* =========================
+   STEPPER CSS
+========================= */
+.connector {
+  position: absolute;
+  top: 2rem;
+  width: 100%;
+  height: 2px;
+  background-color: #d1d5db; /* gray-300 */
+  z-index: 0;
+}
+
+.connector::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: -4px;
+  width: 8px;
+  height: 8px;
+  border-top: 2px solid #d1d5db;
+  border-right: 2px solid #d1d5db;
+  transform: rotate(45deg);
+}
+
+/* =========================
+   CARD
+========================= */
+.service-card {
+  position: relative;
+  background: #fff;
+  border-radius: 20px;
+  overflow: hidden;
+
+  transition: all 0.3s ease;
+}
+
+/* Bottom hover effect */
+.service-card::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+
+  width: 100%;
+  height: 6px;
+
+  background: #3b82f6;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+}
+
+.service-card:hover::after {
+  transform: scaleX(1);
+}
+
+.service-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* =========================
+   IMAGE
+========================= */
+.card-image {
+  position: relative;
+}
+
+.card-image img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+/* =========================
+   BADGE (LIKE IMAGE)
+========================= */
+.category-badge {
+  position: absolute;
+  bottom: -16px;
+  left: 16px;
+
+  background: #3b82f6;
+  color: white;
+
+  padding: 10px 20px;
+  border-radius: 999px;
+  font-size: 14px;
+
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* =========================
+   CONTENT
+========================= */
+.card-content {
+  padding: 25px 20px 20px;
+}
+/* 
+.card-date {
+  color: #3b82f6;
+  font-size: 14px;
+  margin-bottom: 8px;
+} */
+
+.card-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--color-primary);
+  margin-bottom: 10px;
+}
+
+.card-desc {
+  /* color: #666; */
+  font-size: 14px;
+}
+
+.card-points {
+  /* color: #777; */
+  font-size: 13px;
+  margin-top: 8px;
+}
+
+.process-section {
+  /* padding: 80px 20px; */
+  text-align: center;
+  /* background: #fff; */
+}
+
+.process-title {
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--color-text-main);
+  margin-bottom: 60px;
+}
+
+/* .process-title span {
+  color: var(c);
+} */
+
+/* Wrapper */
+.process-wrapper {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  align-items: start;
+}
+
+.process-wrapper::before {
+  content: "";
+  position: absolute;
+  top: 40px;
+  left: 10%;
+  right: 10%;
+
+  height: 2px;
+  background: #d1d5db;
+  z-index: 0;
+}
+
+/* Step */
+.process-step {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+
+/* Circle */
+.circle {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto;
+  /* background: ; */
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  position: relative;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.circle::after {
+  content: "";
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 16px; /* smaller */
+  height: 16px;
+  /* background: #111827; */
+  border-radius: 50%;
+  z-index: 1;
+}
+
+/* Badge */
+.badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background: #0f172a;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 999px;
+  z-index: 2; /* IMPORTANT */
+}
+
+/* Text */
+.process-step h3 {
+  margin-top: 20px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #212455;
+}
+
+.process-step p {
+  margin-top: 8px;
+  font-size: 14px;
+  color: #6b7280;
+  max-width: 180px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .process-wrapper {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+  }
+
+  .process-wrapper::before {
+    display: none;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-}
+
