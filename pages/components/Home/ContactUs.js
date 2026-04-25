@@ -11,31 +11,31 @@ export default function ContactSection() {
 
 const [loading, setLoading] = useState(false);
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  setLoading(true);
+// const handleSubmit = async (e) => {
+//   e.preventDefault();
+//   setLoading(true);
 
-  try {
-    const res = await fetch("/api/contact", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(form),
-    });
+//   try {
+//     const res = await fetch("/api/contact", {
+//       method: "POST",
+//       headers: { "Content-Type": "application/json" },
+//       body: JSON.stringify(form),
+//     });
 
-    const data = await res.json();
+//     const data = await res.json();
 
-    if (data.success) {
-      alert("Message sent successfully!");
-      setForm({ name: "", phone: "", email: "", message: "" });
-    } else {
-      alert("Failed to send message");
-    }
-  } catch (err) {
-    alert("Something went wrong");
-  }
+//     if (data.success) {
+//       alert("Message sent successfully!");
+//       setForm({ name: "", phone: "", email: "", message: "" });
+//     } else {
+//       alert("Failed to send message");
+//     }
+//   } catch (err) {
+//     alert("Something went wrong");
+//   }
 
-  setLoading(false);
-};
+//   setLoading(false);
+// };
   return (
     <section className="py-20 bg-light" id="contact">
       <div className="max-w-7xl mx-auto px-6">
@@ -53,7 +53,9 @@ const handleSubmit = async (e) => {
           {/* LEFT - FORM */}
           <div className="bg-white p-6 rounded-xl shadow">
             <h3 className="font-semibold mb-4 text-black">GET IN TOUCH</h3>
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form 
+            // onSubmit={handleSubmit}
+             className="space-y-4">
               <input
                 placeholder="Name"
                 value={form.name}
