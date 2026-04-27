@@ -15,28 +15,13 @@ export default function Footer() {
     <footer className="bg-primary text-gray-300 pt-12">
       {/* Top Section */}
       <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-8">
-        {/* Company Info */}
+        {/* Logo Section */}
         <div>
+          <img src="/logo.jpeg" alt="logo" width={200} className="mb-3" />
 
-          <h1 className="flex items-center gap-2 font-bold text-xl text-secondary mb-2">
-            {/* Logo */}
-            <img
-              src="/logo.jpeg"
-              alt="logo"
-              className=""
-              width={"200px"}
-              // height={"150px"}
-            />
-
-            {/* Name */}
-            {/* <span>
-              <span className="text-white">Yathin</span>
-              <span className="text-blue ml-1">Infotech</span>
-            </span> */}
-          </h1>
           <p className="text-sm leading-relaxed">
             Connecting top IT talent with innovative companies across the United
-            States and Globally.
+            States and globally.
           </p>
         </div>
 
@@ -57,25 +42,39 @@ export default function Footer() {
                         {link.type === "address" && <FaMapMarkerAlt />}
                       </span>
 
-                      <div className="hover:text-secondary transition cursor-pointer">
+                      <div>
                         {link.type === "email" && (
-                          <a href={`mailto:${link.value}`}>{link.value}</a>
+                          <a
+                            href={`mailto:${link.value}`}
+                            className="hover:text-secondary"
+                          >
+                            {link.value}
+                          </a>
                         )}
 
                         {link.type === "phone" && (
-                          <a href={`tel:${link.value}`}>{link.value}</a>
+                          <a
+                            href={`tel:${link.value}`}
+                            className="hover:text-secondary"
+                          >
+                            {link.value}
+                          </a>
                         )}
 
                         {link.type === "address" && link.value}
                       </div>
                     </div>
                   ) : (
-                    /* Other Sections */
-                    <div className="flex items-center gap-2 group cursor-pointer">
-                      <IoIosArrowForward className="text-gray-400 group-hover:text-secondary transition" />
-                      <span className="group-hover:text-secondary transition">
-                        {link}
-                      </span>
+                    /* Scroll Links */
+                    <div className="flex items-center gap-2">
+                      <IoIosArrowForward className="text-gray-400" />
+
+                      <a
+                        href={`#${link.id}`}
+                        className="text-gray-300 hover:text-white hover:translate-x-1 transition duration-200"
+                      >
+                        {link.name}
+                      </a>
                     </div>
                   )}
                 </li>
@@ -85,48 +84,65 @@ export default function Footer() {
         ))}
       </div>
 
-      {/* Social */}
+      {/* Social Media */}
       <div className="max-w-7xl mx-auto px-6 mt-10">
         <h4 className="text-white mb-4">Follow Us</h4>
+
         <div className="flex gap-4">
-          <Icon icon={<FaFacebookF />} />
-          <Icon icon={<FaXTwitter />} />
-          <Icon icon={<FaLinkedinIn />} />
-          <Icon icon={<FaInstagram />} />
-          <Icon icon={<FaYoutube />} />
+          <Icon icon={<FaFacebookF />} link="" />
+          <Icon icon={<FaXTwitter />} link="" />
+          <Icon icon={<FaLinkedinIn />} link="" />
+          <Icon
+            icon={<FaInstagram />}
+            link="https://www.instagram.com/yathininfotech/m"
+          />
+          <Icon icon={<FaYoutube />} link="" />
         </div>
       </div>
 
       {/* Bottom */}
       <div className="bg-secondary mt-10 py-4">
-        <div className="max-w-7xl mx-auto px-6 text-sm text-center text-white">
-          © 2026 Yathininfotech. All rights reserved.
+        <div className="text-center text-white text-sm">
+          © 2026 Yathin Infotech. All rights reserved.
         </div>
       </div>
     </footer>
   );
 }
 
-function Icon({ icon }) {
+/* Social Icon */
+function Icon({ icon, link }) {
   return (
-    <div className="w-9 h-9 flex items-center justify-center rounded-full bg-gray-700 hover:bg-white hover:text-black cursor-pointer transition">
+    <a
+      href={link}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="w-9 h-9 flex items-center justify-center rounded-full bg-gray-700 hover:bg-white hover:text-black transition"
+    >
       {icon}
-    </div>
+    </a>
   );
 }
+
+/* Footer Data */
 const footerLinks = [
   {
     title: "Services",
     links: [
-      "Embedded Systems",
-      "Cloud Computing",
-      "AI / ML",
-      "Application Development",
+      { name: "Embedded Systems", id: "services" },
+      { name: "Cloud Computing", id: "services" },
+      { name: "AI / ML", id: "services" },
+      { name: "Application Development", id: "services" },
     ],
   },
   {
     title: "Company",
-    links: ["About Us", "services", "Blog", "contact"],
+    links: [
+      { name: "About Us", id: "about" },
+      { name: "Services", id: "services" },
+      { name: "Blog", id: "blog" },
+      { name: "Contact", id: "contact" },
+    ],
   },
   {
     title: "Contact",
@@ -135,8 +151,7 @@ const footerLinks = [
       { type: "phone", value: "+91 9281703075" },
       {
         type: "address",
-        value:
-          "303 Fortune Chambers, Silicon Valley, Madhapur, Hyderabad 500081",
+        value: "303 Fortune Chambers, Madhapur, Hyderabad 500081",
       },
     ],
   },

@@ -52,8 +52,8 @@ const Layout = ({ children }) => {
         {/* ✅ Canonical */}
         <link rel="canonical" href="https://www.yathininfotech.com/" />
 
-        {/* ✅ Favicon (optional but important) */}
-        <link rel="icon" href="/favicon.ico" />
+       
+        <link rel="icon" href="/logo-symbol.png" />
       </Head>
 
       {children}

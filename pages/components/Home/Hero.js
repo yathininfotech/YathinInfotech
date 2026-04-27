@@ -6,7 +6,7 @@ import { FaArrowRight } from "react-icons/fa";
 
 const images = [
   "/images/Hero/heroImage1.png",
-  "/images/Hero/heroImage2.png",
+  "/images/Hero/HeroImage2.png",
 ];
 
 export default function Hero() {
