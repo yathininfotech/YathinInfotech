@@ -2,11 +2,13 @@ import SectionHeading from "../common/SectionHeading";
 
 export default function WhyUs() {
   return (
-    <div className="bg-light text-white min-h-screen flex items-center px-6" id="whyus">
+    <div className="bg-white text-white min-h-screen flex items-center px-6" id="whyus">
       <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-10 items-center ">
         {/* LEFT CONTENT */}
-        <div>
-          <SectionHeading title="Why Choose " highlight="Us" align="left" />
+        <div clasName="">
+          <div className="pt-5">
+            <SectionHeading title="Why Choose " highlight="Us" align="left" />
+            </div>
 
           <h1 className="text-4xl font-bold leading-tight text-primary mb-6">
             Premium Technology Services Across the U.S.
@@ -38,7 +40,7 @@ export default function WhyUs() {
         </div>
 
         {/* RIGHT CARDS */}
-        <div className="grid grid-cols-2 gap-6">
+        <div className="grid grid-cols-2 gap-6 py-5">
           {/* CARD 1 */}
           <div className="bg-secondary rounded-2xl p-6 text-center shadow-lg">
             <h2 className="text-4xl font-bold">200+</h2>

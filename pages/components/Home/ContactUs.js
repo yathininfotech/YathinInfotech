@@ -1,43 +1,52 @@
 import { useState } from "react";
 import SectionHeading from "../common/SectionHeading";
-
+import toast, { Toaster } from "react-hot-toast";
 export default function ContactSection() {
-  const [form, setForm] = useState({
+const [form, setForm] = useState({
     name: "",
     phone: "",
     email: "",
     message: "",
   });
 
-const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-// const handleSubmit = async (e) => {
-//   e.preventDefault();
-//   setLoading(true);
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
 
-//   try {
-//     const res = await fetch("/api/contact", {
-//       method: "POST",
-//       headers: { "Content-Type": "application/json" },
-//       body: JSON.stringify(form),
-//     });
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
 
-//     const data = await res.json();
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(form),
+      });
 
-//     if (data.success) {
-//       alert("Message sent successfully!");
-//       setForm({ name: "", phone: "", email: "", message: "" });
-//     } else {
-//       alert("Failed to send message");
-//     }
-//   } catch (err) {
-//     alert("Something went wrong");
-//   }
+      const data = await res.json();
 
-//   setLoading(false);
-// };
+      if (data.success) {
+        toast.success("Message sent successfully!");
+        setForm({ name: "", phone: "", email: "", message: "" });
+      } else {
+        toast.error(data.message || "Failed to send message");
+      }
+    } catch (err) {
+      toast.error("Something went wrong");
+    }
+
+    setLoading(false);
+  };
+
   return (
-    <section className="py-20 bg-light" id="contact">
+    <>
+    <Toaster position="top-right" />
+        <section className="py-20 bg-light" id="contact">
       <div className="max-w-7xl mx-auto px-6">
         {/* Heading */}
         <div className="mb-10">
@@ -54,42 +63,46 @@ const [loading, setLoading] = useState(false);
           <div className="bg-white p-6 rounded-xl shadow">
             <h3 className="font-semibold mb-4 text-black">GET IN TOUCH</h3>
             <form 
-            // onSubmit={handleSubmit}
+            onSubmit={handleSubmit}
              className="space-y-4">
-              <input
-                placeholder="Name"
-                value={form.name}
-                onChange={(e) => setForm({ ...form, name: e.target.value })}
-                className="border p-3 w-full text-black"
-                required
-              />
+        <input
+  name="name"
+  placeholder="Name"
+  value={form.name}
+  onChange={handleChange}
+  className="border p-3 w-full text-black"
+  required
+/>
 
-              <input
-                placeholder="Phone"
-                value={form.phone}
-                onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                className="border p-3 w-full text-black"
-                required
-              />
+<input
+  name="phone"
+  placeholder="Phone"
+  value={form.phone}
+  onChange={handleChange}
+  className="border p-3 w-full text-black"
+  required
+/>
 
-              <input
-                type="email"
-                placeholder="Email"
-                value={form.email}
-                onChange={(e) => setForm({ ...form, email: e.target.value })}
-                className="border p-3 w-full text-black"
-                required
-              />
+<input
+  name="email"
+  type="email"
+  placeholder="Email"
+  value={form.email}
+  onChange={handleChange}
+  className="border p-3 w-full text-black"
+  required
+/>
 
-              <textarea
-                placeholder="Message"
-                value={form.message}
-                onChange={(e) => setForm({ ...form, message: e.target.value })}
-                className="border p-3 w-full text-black"
-                required
-              />
-
+<textarea
+  name="message"
+  placeholder="Message"
+  value={form.message}
+  onChange={handleChange}
+  className="border p-3 w-full text-black"
+  required
+/>
               <button
+  type="submit"
   disabled={loading}
   className="bg-secondary text-white py-3 w-full rounded-lg"
 >
@@ -166,6 +179,7 @@ const [loading, setLoading] = useState(false);
           ></iframe>
         </div>
       </div>
-    </section>
+    </section></>
+
   );
 }

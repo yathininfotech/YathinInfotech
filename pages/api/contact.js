@@ -1,34 +1,51 @@
-// import { Resend } from "resend";
+import nodemailer from "nodemailer";
 
-// const resend = new Resend(process.env.RESEND_API_KEY);
+export default async function handler(req, res) {
+  if (req.method !== "POST") {
+    return res.status(405).json({ success: false, message: "Method not allowed" });
+  }
 
-// export default async function handler(req, res) {
-//   if (req.method !== "POST") {
-//     return res.status(405).json({ success: false });
-//   }
+  try {
+    const { name, phone, email, message } = req.body;
 
-//   try {
-//     const { name, phone, email, message } = req.body;
 
-//     const response = await resend.emails.send({
-//       from: `${email}`, // ✅ use this FIRST
-//       to: "maheswarikaveti86@gmail.com", // ✅ YOU receive here
-//       reply_to: email, // optional but useful
-//       subject: `New Contact Form - ${name}`,
-//       html: `
-//         // <h2>New Inquiry</h2>
-//         <p><b>Name:</b> ${name}</p>
-//         <p><b>Phone:</b> ${phone}</p>
-//         <p><b>Email:</b> ${email}</p>
-//         <p><b>Message:</b> ${message}</p>
-//       `,
-//     });
+    if (!name || !email || !message) {
+      return res.status(400).json({ success: false, message: "Missing fields" });
+    }
 
-//     console.log("RESEND RESPONSE:", response);
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+      },
+    });
 
-//     return res.status(200).json({ success: true });
-//   } catch (error) {
-//     console.error("ERROR:", error);
-//     return res.status(500).json({ success: false });
-//   }
-// }
+    const mailOptions = {
+      from: `"Website Contact" <${process.env.EMAIL_USER}>`,
+      to: process.env.EMAIL_USER,
+      replyTo: email,
+      subject: `New Contact Form - ${name}`,
+      html: `
+        <h2>New Inquiry</h2>
+        <p><b>Name:</b> ${name}</p>
+        <p><b>Phone:</b> ${phone}</p>
+        <p><b>Email:</b> ${email}</p>
+        <p><b>Message:</b> ${message}</p>
+      `,
+    };
+
+    await transporter.sendMail(mailOptions);
+
+    return res.status(200).json({
+      success: true,
+      message: "Email sent successfully",
+    });
+  } catch (error) {
+    console.error("ERROR:", error);
+    return res.status(500).json({
+      success: false,
+      message: "Email failed",
+    });
+  }
+}

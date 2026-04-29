@@ -13,14 +13,14 @@ const HomePage = () => {
   return (
     <div>
       <Hero/>
+      <AboutUs/>
       <Services/>
+      <WhyUs/>
+      <ContactSection/>
       <Companies/>
       <Capabilities/>
       <ProcessCards/>
-      <AboutUs/>
-      <WhyUs/>
       <FAQSection/>
-      <ContactSection/>
     </div>
   )
 }
