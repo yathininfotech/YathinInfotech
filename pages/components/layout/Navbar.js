@@ -10,7 +10,7 @@ export default function Navbar() {
   const handleScroll = (id) => {
     const el = document.getElementById(id);
     if (el) {
-      const offset = 100; 
+      const offset = 100;
       const top = el.offsetTop - offset;
 
       window.scrollTo({
@@ -18,14 +18,13 @@ export default function Navbar() {
         behavior: "smooth",
       });
 
-      setOpen(false); 
+      setOpen(false);
     }
   };
 
   return (
     <div className="fixed top-5 left-1/2 -translate-x-1/2 w-[90%] max-w-6xl z-50">
       <div className="bg-white/90 backdrop-blur-md rounded-full px-6 py-3 flex justify-between items-center shadow-md">
-        
         {/* Logo */}
         <h1 className="flex items-center gap-2 font-bold text-xl text-blue-900">
           <img
@@ -33,7 +32,7 @@ export default function Navbar() {
             alt="logo"
             className=""
             width={"150px"}
-             height={"50px"}
+            height={"50px"}
           />
           {/* <span>
             <span className="text-primary">Yathin</span>
@@ -43,16 +42,28 @@ export default function Navbar() {
 
         {/* Desktop Links */}
         <div className="hidden md:flex gap-8 text-gray-700">
-          <span onClick={() => handleScroll("services")} className="cursor-pointer hover:text-primary">
-            Services
-          </span>
-          <span onClick={() => handleScroll("whyus")} className="cursor-pointer hover:text-primary">
-            Why Us
-          </span>
-          <span onClick={() => handleScroll("about")} className="cursor-pointer hover:text-primary">
+          <span
+            onClick={() => handleScroll("about")}
+            className="cursor-pointer hover:text-primary"
+          >
             About Us
           </span>
-          <span onClick={() => handleScroll("contact")} className="cursor-pointer hover:text-primary">
+          <span
+            onClick={() => handleScroll("services")}
+            className="cursor-pointer hover:text-primary"
+          >
+            Services
+          </span>
+          <span
+            onClick={() => handleScroll("whyus")}
+            className="cursor-pointer hover:text-primary"
+          >
+            Why Us
+          </span>
+          <span
+            onClick={() => handleScroll("contact")}
+            className="cursor-pointer hover:text-primary"
+          >
             Contact
           </span>
         </div>
@@ -83,16 +94,28 @@ export default function Navbar() {
         }`}
       >
         <div className="flex flex-col gap-4 text-gray-700">
-          <span onClick={() => handleScroll("services")} className="cursor-pointer hover:text-primary">
+          <span
+            onClick={() => handleScroll("services")}
+            className="cursor-pointer hover:text-primary"
+          >
             Services
           </span>
-          <span onClick={() => handleScroll("whyus")} className="cursor-pointer hover:text-primary">
+          <span
+            onClick={() => handleScroll("whyus")}
+            className="cursor-pointer hover:text-primary"
+          >
             Why Us
           </span>
-          <span onClick={() => handleScroll("about")} className="cursor-pointer hover:text-primary">
+          <span
+            onClick={() => handleScroll("about")}
+            className="cursor-pointer hover:text-primary"
+          >
             About Us
           </span>
-          <span onClick={() => handleScroll("contact")} className="cursor-pointer hover:text-primary">
+          <span
+            onClick={() => handleScroll("contact")}
+            className="cursor-pointer hover:text-primary"
+          >
             Contact
           </span>
         </div>
